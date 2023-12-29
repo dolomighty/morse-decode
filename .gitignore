@@ -1,0 +1,4 @@
+log
+dyn
+*.o
+*.out+err
