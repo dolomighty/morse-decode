@@ -39,6 +39,9 @@ CFLAGS+= -O3
 #CFLAGS+= -fopenmp
 #LIBS  += -fopenmp
 
+## fftw
+#CFLAGS+= `pkg-config --cflags fftw3f`
+#LIBS  += `pkg-config --libs   fftw3f`
 
 
 .PHONY: all

@@ -145,10 +145,23 @@ void frame( SDL_Event event, float dt ){  // HEADER
                 SDL_SetRenderDrawBlendMode( renderer, SDL_BLENDMODE_NONE );
             }
 
+            // zero
+            {
+                SDL_Rect r ={
+                    .x = x,
+                    .y = WINH*3/4,
+                    .w = 1,
+                    .h = 1,
+                };
+                SDL_SetRenderDrawColor( renderer, 64,64,64, 255 );
+                SDL_RenderFillRect( renderer, &r );
+            }
+
             /************/            track_draw( stats.imax, stats.imin, x, WINH*1/4, 255,255,255 );
             /************/            track_draw( stats.omax, stats.omin, x, WINH*3/4, 255,255,255 );
             if(audio_aux_red_enabled) track_draw( stats.rmax, stats.rmin, x, WINH*3/4, 255,128,128 );
             if(audio_aux_grn_enabled) track_draw( stats.gmax, stats.gmin, x, WINH*3/4, 128,255,128 );
+            if(audio_aux_cyn_enabled) track_draw( stats.cmax, stats.cmin, x, WINH*3/4, 128,255,255 );
 
         }
 
@@ -159,17 +172,22 @@ void frame( SDL_Event event, float dt ){  // HEADER
 
 
 
-    if(audio_paused && fmod(now,1)>0.5){
-        SDL_SetRenderDrawColor( renderer, 255,255,0, 32 );
-        SDL_Rect r ={
-            .x = 10,
-            .y = 10,
-            .w = 5,
-            .h = 15,
-        };
-        SDL_RenderFillRect( renderer, &r );
-        r.x = 20;
-        SDL_RenderFillRect( renderer, &r );
+    if(audio_paused || !audio_running){
+        if(fmod(now,1)>0.5){
+            SDL_SetRenderDrawColor( renderer, 255,255,0, 32 );
+            SDL_Rect r ={
+                .x = 10,
+                .y = 10,
+                .w = 5,
+                .h = 15,
+            };
+            SDL_RenderFillRect( renderer, &r );
+            r.x = 20;
+            SDL_RenderFillRect( renderer, &r );
+        }
+    }else {
+        // TODO: disegnare una serie di >>>
+        // per indicare la velocità di tracciamento
     }
 
     vline_draw();

@@ -232,8 +232,3 @@ float detect( float in ){  // HEADER
 
 
 
-
-
-
-
-

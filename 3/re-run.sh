@@ -1,2 +1,2 @@
 #!/bin/sh
-exec xterm -e "(make re ; make run) 2>&1 | tee .run.out+err"
+exec xterm -geometry 130x30+0-0 -e "(make re ; make run) || read"
